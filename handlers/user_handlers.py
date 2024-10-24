@@ -74,6 +74,7 @@ async def process_strong_compression_command(callback: CallbackQuery, state: FSM
 
     
     await state.clear()  # Очищение текущего состояния FSM
+    await state.set_state(CompressionState.waiting_for_text) # Обновление состояния FSM
 
 
 # Обработчик нажатия кнопки "умеренное сжатие"
@@ -96,3 +97,4 @@ async def process_weak_compression_command(callback: CallbackQuery, state: FSMCo
                                 reply_markup=ReplyKeyboardRemove())
 
     await state.clear()  # Очищение текущее состояние FSM
+    await state.set_state(CompressionState.waiting_for_text) # Обновление состояния FSM
