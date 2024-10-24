@@ -1,6 +1,6 @@
-from aiogram import Router, F
+from aiogram import Router, F, Bot
 from aiogram.filters import CommandStart, StateFilter
-from aiogram.types import Message, CallbackQuery
+from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
 from aiogram.fsm.context import FSMContext
 from lexicon.lexicon import LEXICON
 from states.compression_states import CompressionState
@@ -74,7 +74,7 @@ async def process_strong_compression_command(callback: CallbackQuery, state: FSM
 # Обработчик нажатия кнопки "умеренное сжатие"
 @router.callback_query(F.data == "weak_compression_button_pressed", 
                        StateFilter(CompressionState.waiting_for_compression_type))
-async def process_weak_compression_command(callback: CallbackQuery, state: FSMContext):
+async def process_weak_compression_command(callback: CallbackQuery, state: FSMContext, bot: Bot):
     """
     Обрабатывает нажатие на кнопку выбора слабого сжатия.
     Очищает текущее состояние после выбора.
@@ -85,5 +85,9 @@ async def process_weak_compression_command(callback: CallbackQuery, state: FSMCo
     await callback.message.edit_text(text=msg_text, reply_markup=None)  # Отправление сообщения о начале сжатия
     msg_text = compress_text(collected_text, "weak")
     await callback.message.edit_text(text=msg_text)  # Отправление сжатого текста
+    msg_text = LEXICON["/start"]
+    await bot.send_message(callback.from_user.id,
+                                text=msg_text,
+                                reply_markup=ReplyKeyboardRemove())
 
     await state.clear()  # Очищение текущее состояние FSM

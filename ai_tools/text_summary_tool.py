@@ -1,10 +1,10 @@
 import nltk
+import ssl
 from nltk.tokenize import sent_tokenize, word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 
-
-# Скачивание данных nltk для токенизации предложений и слов
+# Скачивание данных nltk для токенизации предложений и слов 
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
