@@ -68,13 +68,10 @@ async def process_strong_compression_command(callback: CallbackQuery, state: FSM
     msg_text = compress_text(collected_text, "strong")
     await callback.message.edit_text(text=msg_text)  # Отправление сжатого текста
     msg_text = LEXICON["/start"]
-    await bot.send_message(callback.from_user.id,
-                            text=msg_text,
-                            reply_markup=ReplyKeyboardRemove())
+    await bot.send_message(callback.from_user.id, text=msg_text, reply_markup=ReplyKeyboardRemove())
 
-    
     await state.clear()  # Очищение текущего состояния FSM
-    await state.set_state(CompressionState.waiting_for_text) # Обновление состояния FSM
+    await state.set_state(CompressionState.waiting_for_text)  # Обновление состояния FSM
 
 
 # Обработчик нажатия кнопки "умеренное сжатие"
@@ -92,9 +89,7 @@ async def process_weak_compression_command(callback: CallbackQuery, state: FSMCo
     msg_text = compress_text(collected_text, "weak")
     await callback.message.edit_text(text=msg_text)  # Отправление сжатого текста
     msg_text = LEXICON["/start"]
-    await bot.send_message(callback.from_user.id,
-                                text=msg_text,
-                                reply_markup=ReplyKeyboardRemove())
+    await bot.send_message(callback.from_user.id, text=msg_text, reply_markup=ReplyKeyboardRemove())
 
     await state.clear()  # Очищение текущее состояние FSM
-    await state.set_state(CompressionState.waiting_for_text) # Обновление состояния FSM
+    await state.set_state(CompressionState.waiting_for_text)  # Обновление состояния FSM

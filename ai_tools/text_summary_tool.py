@@ -1,5 +1,4 @@
 import nltk
-import ssl
 from nltk.tokenize import sent_tokenize, word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np

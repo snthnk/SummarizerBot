@@ -1,4 +1,4 @@
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
 
 # Кнопка для завершения ввода текста
 done_button = KeyboardButton(text="Закончить ввод текста")
@@ -28,5 +28,3 @@ done_keyboard = ReplyKeyboardMarkup(
     keyboard=[[done_button]],  # Кнопка для завершения ввода
     resize_keyboard=True  # Изменяем размер клавиатуры под экран устройства
 )
-
-
