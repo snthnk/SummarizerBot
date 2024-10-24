@@ -55,7 +55,7 @@ async def process_waiting_for_text_command(message: Message, state: FSMContext):
 # Обработчик нажатия кнопки "сильное сжатие"
 @router.callback_query(F.data == "strong_compression_button_pressed", 
                        StateFilter(CompressionState.waiting_for_compression_type))
-async def process_strong_compression_command(callback: CallbackQuery, state: FSMContext):
+async def process_strong_compression_command(callback: CallbackQuery, state: FSMContext, bot: Bot):
     """
     Обрабатывает нажатие на кнопку выбора сильного сжатия.
     Здесь будет добавлена логика сильного сжатия текста.
@@ -67,6 +67,11 @@ async def process_strong_compression_command(callback: CallbackQuery, state: FSM
     await callback.message.edit_text(text=msg_text, reply_markup=None)  # Отправление сообщения о начале сжатия
     msg_text = compress_text(collected_text, "strong")
     await callback.message.edit_text(text=msg_text)  # Отправление сжатого текста
+    msg_text = LEXICON["/start"]
+    await bot.send_message(callback.from_user.id,
+                            text=msg_text,
+                            reply_markup=ReplyKeyboardRemove())
+
     
     await state.clear()  # Очищение текущего состояния FSM
 
