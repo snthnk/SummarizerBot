@@ -88,3 +88,5 @@
 
 
 # Демо-версия работы бота
+
+https://disk.yandex.ru/i/QKXx33ao-w0Yvw
